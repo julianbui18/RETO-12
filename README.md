@@ -115,4 +115,68 @@ for usuario in datos:
 4. A través de un programa conectese a al menos 3 API's , obtenga el JSON, imprimalo y extraiga los pares de llave : valor.
 
 **SOLUCION**
+
+Para esto, primero fue necesario instalar una libreria externa, que es ```requests```, sirve para poder conectarte a internet y en este caso poder accerder a los links de los API's.
+
+Se instalo poniendo en la consola lo siguiente:
 ```python
+pip install requests
+```
+
+Ya teniendo esto instalado podra funcionar codigo.
+
+```python
+# Importamos la librería "requests" para poder conectarnos a internet y usar APIs
+import requests
+# Esta función sirve para mostrar todos los pares clave:valor de un diccionario
+def imprimir_pares(diccionario):
+    for clave in diccionario:
+        print(clave, ":", diccionario[clave])
+
+# API 1: randomuser.me
+# Nos conectamos a la API que da un usuario aleatorio
+print("API 1: Usuario aleatorio")
+respuesta1 = requests.get("https://randomuser.me/api/")  # Hacemos la solicitud
+datos1 = respuesta1.json()  # Convertimos la respuesta a formato JSON
+print("JSON completo:")  # Mostramos el JSON completo
+print(datos1)
+
+# Como los datos vienen dentro de una lista llamada 'results', tomamos el primer usuario
+usuario1 = datos1["results"][0]
+
+# Imprimimos los pares clave:valor de ese usuario
+print("Pares clave:valor del usuario:")
+imprimir_pares(usuario1)
+
+print("--------------------------------------------------")
+
+# API 2: official-joke-api
+# Nos conectamos a la API que da un chiste con setup y punchline
+print("API 2: Chiste corto (setup + punchline)")
+respuesta2 = requests.get("https://official-joke-api.appspot.com/random_joke")  # Solicitud
+datos2 = respuesta2.json()  # Convertimos la respuesta a JSON
+print("JSON completo:")  # Mostramos todo el JSON
+print(datos2)
+
+# Imprimimos los pares clave:valor del chiste
+print("Pares clave:valor del chiste:")
+imprimir_pares(datos2)
+
+print("--------------------------------------------------")
+
+# API 3: nationalize.io
+# Esta API nos dice de qué país puede ser un nombre (en este caso: "nathaniel")
+print("API 3: Nacionalidad probable del nombre 'nathaniel'")
+respuesta3 = requests.get("https://api.nationalize.io/?name=nathaniel")  # Solicitud
+datos3 = respuesta3.json()  # Convertimos a JSON
+print("JSON completo:")
+print(datos3)
+
+# Imprimimos los pares clave:valor del JSON
+print("Pares clave:valor del nombre:")
+imprimir_pares(datos3)
+
+print("--------------------------------------------------")
+```
+
+**JULIAN ESTEBAN BUITRAGO CRUZ**
